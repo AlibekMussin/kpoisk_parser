@@ -31,6 +31,17 @@ class Movie(models.Model):
         null=True,
         blank=True
     )
+    created_at = models.DateTimeField(
+        verbose_name='Создано',
+        auto_now_add=True,
+        editable=False,
+        null=True,
+        blank=True
+    )
+    updated_at = models.DateTimeField(
+        verbose_name='Обновлено',
+        auto_now=True
+    )
 
     def __str__(self):
         return str(self.title_ru)

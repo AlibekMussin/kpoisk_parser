@@ -1,3 +1,4 @@
+from datetime import datetime
 import requests
 import csv
 import  os
@@ -76,17 +77,32 @@ class Command(BaseCommand):
                         sheet[f"B{row_number}"] = title_eng_text
                         sheet[f"C{row_number}"] = year
                         sheet[f"D{row_number}"] = length
-                        print(f"{num}, {title.text}")
+                        # print(f"{num}, {title.text}")
                         title_eng_text_norm = title_eng_text.replace('é', 'e')
                         title_eng_text_norm = title_eng_text_norm.replace('è', 'e')
                         title_eng_text_norm = title_eng_text_norm.replace('û', 'u')
-                        Movie.objects.create(
-                            position_in_top=position,
-                            title_ru=str(title.text),
-                            title_en=title_eng_text_norm,
-                            year=year,
-                            length=length
-                        )
+                        check_position = Movie.objects.filter(
+                            position_in_top=position
+                        ).last()
+                        if check_position is None:
+                            print("add new movie")
+                            Movie.objects.create(
+                                position_in_top=position,
+                                title_ru=str(title.text),
+                                title_en=title_eng_text_norm,
+                                year=year,
+                                length=length
+                            )
+                        else:
+                            if check_position.title_ru != str(title.text):
+                                print("update movie")
+                                check_position.title_ru = str(title.text)
+                                check_position.title_en = title_eng_text_norm
+                                check_position.year = year
+                                check_position.length = length
+                                check_position.updated_at = datetime.now()
+                                check_position.save()
+
                         # writer.writerow([str(title.text), title_eng_text_norm, year, length])
 
         if 'xlsx' in file_format:

@@ -36,7 +36,7 @@ class MovieAdmin(admin.ModelAdmin):
         response.write(output.getvalue().encode('cp1251'))
         return response
 
-    download_movies_csv.short_description = 'Скачать фильм в формате CSV'
+    download_movies_csv.short_description = 'Скачать фильмы в формате CSV'
 
     def download_movies_xlsx(self, request, queryset):
         # Функция скачивания файла с ТОПом
@@ -58,5 +58,5 @@ class MovieAdmin(admin.ModelAdmin):
         wb.save(response)
         return response
 
-    download_movies_xlsx.short_description = 'Скачать фильм в формате Xlsx'
+    download_movies_xlsx.short_description = 'Скачать фильмы в формате xlsx'
 

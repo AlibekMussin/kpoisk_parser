@@ -6,12 +6,14 @@
 1. Дублировать файл .env_example и назвать копию .env
 Там прописать доступ к вашей БД на postgreSQL
 
+Зайти на кинопоиск, скопировать из хидеров оттуда значение параметра cookie, прописать в параметр COOKIE в енве
 2. Выполнить миграции:
 python .\manage.py migrate
 
 3. Создать суперюзера:
 python .\manage.py createsuperuser --username=parser_admin
 Указать пароль и email (если попросит)
+
 
 <strong>Далее можно запустить с помощью python shell:</strong>
 

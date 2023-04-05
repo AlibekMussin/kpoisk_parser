@@ -103,7 +103,7 @@ class Command(BaseCommand):
                                 check_position.updated_at = datetime.now()
                                 check_position.save()
 
-                        # writer.writerow([str(title.text), title_eng_text_norm, year, length])
+                        writer.writerow([str(title.text), title_eng_text_norm, year, length])
 
         if 'xlsx' in file_format:
             print("save to xlsx...")
